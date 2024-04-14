@@ -7,9 +7,7 @@ pipeline {
                 echo 'Hello World from Test stage'
             }
         }
-    }
 
-    stages {
         stage('build') {
             steps {
                 echo 'Installing Docker'
@@ -24,13 +22,11 @@ pipeline {
                 echo 'Hello World from Build stage'
             }
         }
-    }
 
-    stages {
         stage('deploy') {
             steps {
                 echo 'Hello World from Deploy stage'
             }
         }
-    }
+    }    
 }
