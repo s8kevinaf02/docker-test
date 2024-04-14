@@ -1,8 +1,11 @@
 pipeline {
     agent {
-        docker{
+        docker {
             image 'maven:3.8.1-adoptopenjdk-11'
-            args '-u root' // Run Docker commands as root
+            args '-u root'
+            reuseNode true
+            privileged true
+            services docker: 'docker:dind'
         }
     }
 
