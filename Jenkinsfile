@@ -19,13 +19,11 @@ pipeline {
         stage('build') {
             steps {
                 echo 'Installing Docker'
-                withRun('-u root') {
-                    sh '''
-                    apk --no-cache add docker
-                    rc-update add docker boot
-                    service docker start
-                    '''
-                }
+                sh '''
+                apk --no-cache add docker
+                rc-update add docker boot
+                service docker start
+                '''
                 echo 'Hello World from Build stage'
             }
         }
