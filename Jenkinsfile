@@ -3,6 +3,7 @@ pipeline {
         docker {
             image 'docker:latest'
             args '-u root'
+            privileged true
             reuseNode true
         }
     }
