@@ -4,11 +4,6 @@ pipeline {
             image 'maven:3.8.1-adoptopenjdk-11'
             args '-u root'
             reuseNode true
-            // Use a custom Dockerfile to run Docker inside Docker
-            dockerfile '''
-            FROM docker:latest
-            RUN apk --no-cache add openrc docker-compose
-            '''
         }
     }
 
@@ -24,11 +19,13 @@ pipeline {
         stage('build') {
             steps {
                 echo 'Installing Docker'
-                sh '''
-                apk --no-cache add docker
-                rc-update add docker boot
-                service docker start
-                '''
+                withRun('-u root') {
+                    sh '''
+                    apk --no-cache add docker
+                    rc-update add docker boot
+                    service docker start
+                    '''
+                }
                 echo 'Hello World from Build stage'
             }
         }
